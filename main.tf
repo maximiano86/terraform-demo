@@ -48,6 +48,6 @@ module "ec2_two" {
 module "elb" {
   source                = "./terraform-aws-elb"
   digital_subnet_id     = module.networking.subnet_demo
-  digital_ec2_sg_id     = module.security_groups.sg_elb
+  digital_elb_sg_id     = module.security_groups.sg_elb
   digital_ec2_instances = [module.ec2_one.ec2_id, module.ec2_two.ec2_id]
 }

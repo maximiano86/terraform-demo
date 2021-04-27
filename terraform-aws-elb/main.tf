@@ -3,7 +3,7 @@ resource "aws_elb" "digital_elb" {
   name = "digital-elb"
 
   subnets         = [var.digital_subnet_id]
-  security_groups = [var.digital_ec2_sg_id]
+  security_groups = [var.digital_elb_sg_id]
   instances       = [for key, instance in var.digital_ec2_instances : instance]
 
   listener {
