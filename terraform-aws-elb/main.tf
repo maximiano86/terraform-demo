@@ -4,7 +4,7 @@ resource "aws_elb" "digital_elb" {
 
   subnets         = [var.digital_subnet_id]
   security_groups = [var.digital_ec2_sg_id]
-  instances       = [var.digital_ec2_one, var.digital_ec2_two]
+  instances       = [for key, instance in var.digital_ec2_instances : instance]
 
   listener {
     instance_port     = 80

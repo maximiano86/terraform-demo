@@ -1,7 +1,6 @@
 # Local variables
 locals {
-  elb_ports = [80]
-  ec2_ports = [80, 22]
+  common_ports = [80, 443]
 }
 
 # Allow access to ELB from the Internet
@@ -9,9 +8,9 @@ resource "aws_security_group" "digital_sg_elb_demo" {
   name   = "digital_sg_elb_demo"
   vpc_id = var.digital_vpc_id
 
-  # Allow port 80 from anywhere
+  # Allow Common Ports from anywhere
   dynamic "ingress" {
-    for_each = local.elb_ports
+    for_each = local.common_ports
     content {
       from_port   = ingress.value
       to_port     = ingress.value
@@ -34,16 +33,24 @@ resource "aws_security_group" "digital_sg_ec2_demo" {
   name   = "digital_sg_ec2_demo"
   vpc_id = var.digital_vpc_id
 
-  # Open local ec2_ports
+  # Allow Common Ports from anywhere
   dynamic "ingress" {
-    for_each = local.ec2_ports
+    for_each = local.common_ports
     content {
-      from_port   = ingress.value
-      to_port     = ingress.value
-      protocol    = "tcp"
+      from_port = ingress.value
+      to_port   = ingress.value
+      protocol  = "tcp"
       # cidr_blocks = ["10.0.0.0/16"] only from private subnet
       cidr_blocks = ["0.0.0.0/0"]
     }
+  }
+
+  # Allow SSH from anywhere
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   # Access to internet

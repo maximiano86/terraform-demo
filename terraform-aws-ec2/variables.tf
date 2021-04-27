@@ -13,3 +13,8 @@ variable "digital_subnet_id" {
 variable "digital_ec2_sg_id" {
   type = string
 }
+
+# EC2 name
+variable "ec2_name" {
+  type = string
+}
