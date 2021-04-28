@@ -16,6 +16,9 @@ resource "aws_internet_gateway" "digital_internet_gateway_demo" {
   tags = {
     Name = "Digital IGW Demo"
   }
+
+  #depends_on = [aws_vpc.digital_vpc_demo]
+
 }
 
 # Routing Table for Digital OnUs Demo
