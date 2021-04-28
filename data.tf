@@ -4,7 +4,7 @@ data "aws_ami" "ec2_image" {
   owners = ["amazon"]
 
   filter {
-    name   = "name"
-    values = ["amzn-ami-hvm*-x86_64-gp2"]
+    name   = "image-id"
+    values = ["ami-0533f2ba8a1995cf9"]
   }
 }
