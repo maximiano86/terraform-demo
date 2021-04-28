@@ -28,20 +28,13 @@ module "security_groups" {
   digital_vpc_id = module.networking.vpc_demo
 }
 
-# Create EC2 instances #1 
-module "ec2_one" {
+# Create EC2 instances 
+module "ec2_instances" {
   source            = "./terraform-aws-ec2"
+  count = var.ec2_number
   digital_subnet_id = module.networking.subnet_demo
   digital_ec2_sg_id = module.security_groups.sg_ec2
-  ec2_name          = "Digital EC2 One Demo"
-}
-
-# Create EC2 instances #2
-module "ec2_two" {
-  source            = "./terraform-aws-ec2"
-  digital_subnet_id = module.networking.subnet_demo
-  digital_ec2_sg_id = module.security_groups.sg_ec2
-  ec2_name          = "Digital EC2 Two Demo"
+  ec2_name          = "Digital EC2 Demo ${count.index}"
 }
 
 # Create ELB
@@ -49,5 +42,5 @@ module "elb" {
   source                = "./terraform-aws-elb"
   digital_subnet_id     = module.networking.subnet_demo
   digital_elb_sg_id     = module.security_groups.sg_elb
-  digital_ec2_instances = [module.ec2_one.ec2_id, module.ec2_two.ec2_id]
+  digital_ec2_instances = [for key, instance in module.ec2_instances : instance.ec2_id]
 }
