@@ -28,7 +28,7 @@ module "security_groups" {
   digital_vpc_id = module.networking.vpc_demo
 }
 
-# Create EC2 instances #1
+# Create EC2 instances #1 
 module "ec2_one" {
   source            = "./terraform-aws-ec2"
   digital_subnet_id = module.networking.subnet_demo

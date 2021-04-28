@@ -1,4 +1,4 @@
-# Digital EC2 demo
+# Digital EC2 instance 1 demo
 resource "aws_instance" "digital_ec2_demo" {
 
   instance_type          = "t2.micro"
@@ -6,13 +6,13 @@ resource "aws_instance" "digital_ec2_demo" {
   ami                    = var.digital_ami_id
   vpc_security_group_ids = [var.digital_ec2_sg_id]
   user_data              = <<-EOF
-	      #!/bin/bash
-		    sudo yum update -y
-		    sudo yum install httpd -y
-		    sudo systemctl start httpd
+        #!/bin/bash
+        sudo yum update -y
+        sudo yum install httpd -y
+        sudo systemctl start httpd
         sudo systemctl enable httpd
-		    sudo echo "Hostname: $(hostname)" >> /var/www/html/index.html
-		    EOF
+        sudo echo "Hostname: $(hostname)" >> /var/www/html/index.html
+        EOF
 
   tags = {
     Name = var.ec2_name
