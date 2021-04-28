@@ -1,7 +1,8 @@
 # Base image
 variable "digital_ami_id" {
-  description = "Amazon Linux 2 base image"
-  default     = "ami-0533f2ba8a1995cf9"
+  #description = "Amazon Linux 2 base image"
+  #default     = "ami-0533f2ba8a1995cf9"
+  type = string
 }
 
 # Subnet ID from netwroking module

@@ -32,6 +32,7 @@ module "security_groups" {
 module "ec2_instances" {
   source            = "./terraform-aws-ec2"
   count             = var.ec2_number
+  digital_ami_id    = data.aws_ami.ec2_image.id
   digital_subnet_id = module.networking.subnet_demo
   digital_ec2_sg_id = module.security_groups.sg_ec2
   ec2_name          = "Digital EC2 Demo ${count.index}"
