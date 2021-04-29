@@ -43,5 +43,5 @@ module "elb" {
   source                = "./terraform-aws-elb"
   digital_subnet_id     = module.networking.subnet_demo
   digital_elb_sg_id     = module.security_groups.sg_elb
-  digital_ec2_instances = [for key, instance in module.ec2_instances : instance.ec2_id]
+  digital_ec2_instances = module.ec2_instances[*].ec2_id
 }
