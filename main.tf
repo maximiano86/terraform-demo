@@ -10,7 +10,7 @@ terraform {
 
 # AWS Provider
 provider "aws" {
-  region = var.aws_region
+  region = var.aws_region["us-one"]
   # export AWS_ACCESS_KEY_ID & AWS_SECRET_ACCESS_KEY
   # RUN aws configure
 }

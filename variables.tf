@@ -1,7 +1,11 @@
 # Region to work with
 variable "aws_region" {
   description = "AWS Regin to work with"
-  default     = "us-east-1"
+  type = map
+  default     = {
+    "us-one" = "us-east-1"
+    "us-two" = "us-east-2"
+  }
 }
 
 # Number of EC2 instances
